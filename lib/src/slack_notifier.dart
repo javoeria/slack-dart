@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:slack_notifier/src/attachment.dart';
+import 'attachment.dart';
 
 class SlackNotifier {
   SlackNotifier(this.token);
@@ -13,8 +13,8 @@ class SlackNotifier {
   Future<String> send(
     String text, {
     String channel,
-    String icon_emoji,
-    String icon_url,
+    String iconEmoji,
+    String iconUrl,
     String username,
     List<Attachment> attachments,
   }) async {
@@ -27,8 +27,8 @@ class SlackNotifier {
       'link_names': true,
     };
     if (channel != null) body['channel'] = channel;
-    if (icon_emoji != null) body['icon_emoji'] = icon_emoji;
-    if (icon_url != null) body['icon_url'] = icon_url;
+    if (iconEmoji != null) body['icon_emoji'] = iconEmoji;
+    if (iconUrl != null) body['icon_url'] = iconUrl;
     if (username != null) body['username'] = username;
     if (attachments != null) {
       body['attachments'] = attachments.map((a) => a.toMap()).toList();

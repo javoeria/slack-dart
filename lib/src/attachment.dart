@@ -1,32 +1,32 @@
 class Attachment {
   Attachment({
-    this.author_icon,
-    this.author_link,
-    this.author_name,
+    this.authorIcon,
+    this.authorLink,
+    this.authorName,
     this.color,
     this.fallback,
     this.fields,
     this.footer,
-    this.footer_icon,
-    this.image_url,
+    this.footerIcon,
+    this.imageUrl,
     this.pretext,
     this.text,
-    this.thumb_url,
+    this.thumbUrl,
     this.title,
-    this.title_link,
+    this.titleLink,
     this.ts,
   });
 
-  /// A valid URL that displays a small 16px by 16px image to the left of the author_name text.
-  /// Will only work if author_name is present.
-  final String author_icon;
+  /// A valid URL that displays a small 16px by 16px image to the left of the authorName text.
+  /// Will only work if authorName is present.
+  final String authorIcon;
 
-  /// A valid URL that will hyperlink the author_name text.
-  /// Will only work if author_name is present.
-  final String author_link;
+  /// A valid URL that will hyperlink the authorName text.
+  /// Will only work if authorName is present.
+  final String authorLink;
 
   /// Small text used to display the author's name.
-  final String author_name;
+  final String authorName;
 
   /// Changes the color of the border on the left side of this attachment from the default gray.
   /// Can either be one of good (green), warning (yellow), danger (red), or any hex color code (eg. #439FE0).
@@ -44,17 +44,17 @@ class Attachment {
   final String footer;
 
   /// A valid URL to an image file that will be displayed beside the footer text.
-  /// Will only work if author_name is present.
+  /// Will only work if authorName is present.
   /// We'll render what you provide at 16px by 16px.
   /// It's best to use an image that is similarly sized.
-  final String footer_icon;
+  final String footerIcon;
 
   /// A valid URL to an image file that will be displayed at the bottom of the attachment.
   /// We support GIF, JPEG, PNG, and BMP formats.
   ///
   /// Large images will be resized to a maximum width of 360px or a maximum height of 500px, while still maintaining the original aspect ratio.
-  /// Cannot be used with thumb_url.
-  final String image_url;
+  /// Cannot be used with thumbUrl.
+  final String imageUrl;
 
   /// Text that appears above the message attachment block.
   final String pretext;
@@ -70,13 +70,13 @@ class Attachment {
   /// The filesize of the image must also be less than 500 KB.
   ///
   /// For best results, please use images that are already 75px by 75px.
-  final String thumb_url;
+  final String thumbUrl;
 
   /// Large title text near the top of the attachment.
   final String title;
 
   /// A valid URL that turns the title text into a hyperlink.
-  final String title_link;
+  final String titleLink;
 
   /// An integer Unix timestamp that is used to related your attachment to a specific time.
   /// The attachment will display the additional timestamp value as part of the attachment's footer.
@@ -87,21 +87,22 @@ class Attachment {
 
   Map<dynamic, dynamic> toMap() {
     var attachment = {};
-    if (author_icon != null) attachment['author_icon'] = author_icon;
-    if (author_link != null) attachment['author_link'] = author_link;
+    if (authorIcon != null) attachment['author_icon'] = authorIcon;
+    if (authorLink != null) attachment['author_link'] = authorLink;
+    if (authorName != null) attachment['author_name'] = authorName;
     if (color != null) attachment['color'] = color;
     if (fallback != null) attachment['fallback'] = fallback;
     if (fields != null) {
       attachment['fields'] = fields.map((f) => f.toMap()).toList();
     }
     if (footer != null) attachment['footer'] = footer;
-    if (footer_icon != null) attachment['footer_icon'] = footer_icon;
-    if (image_url != null) attachment['image_url'] = image_url;
+    if (footerIcon != null) attachment['footer_icon'] = footerIcon;
+    if (imageUrl != null) attachment['image_url'] = imageUrl;
     if (pretext != null) attachment['pretext'] = pretext;
     if (text != null) attachment['text'] = text;
-    if (thumb_url != null) attachment['thumb_url'] = thumb_url;
+    if (thumbUrl != null) attachment['thumb_url'] = thumbUrl;
     if (title != null) attachment['title'] = title;
-    if (title_link != null) attachment['title_link'] = title_link;
+    if (titleLink != null) attachment['title_link'] = titleLink;
     if (ts != null) attachment['ts'] = ts;
 
     return attachment;

@@ -14,12 +14,12 @@ The `SlackNotifier` class has only one method, with optional parameters to custo
 
 ```dart
 Future<String> send(String text,
-    {String channel, String icon_emoji, String icon_url, String username, List<Attachment> attachments});
+    {String channel, String iconEmoji, String iconUrl, String username, List<Attachment> attachments});
 ```
 
 - `channel`: Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
-- `icon_emoji`: Emoji to use as the icon for this message.
-- `icon_url`: URL to an image to use as the icon for this message.
+- `iconEmoji`: Emoji to use as the icon for this message.
+- `iconUrl`: URL to an image to use as the icon for this message.
 - `username`: Set your bot's user name.
 - `attachments`: Attachment model list that can be added as secondary content.
 
