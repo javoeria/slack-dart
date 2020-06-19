@@ -1,14 +1,24 @@
 # slack_notifier
 
-A new Flutter package project.
+A simple wrapper to post messages from external sources into Slack.
 
-## Getting Started
+[![Build Status](https://travis-ci.com/javoeria/slack-dart.svg?branch=master)](https://travis-ci.com/javoeria/slack-dart)
+[![pub package](https://img.shields.io/pub/v/slack_notifier.svg)](https://pub.dartlang.org/packages/slack_notifier)
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+## Usage
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+To use this package, your workspace needs to have a Webhook URL.
+If you don't have it, follow the instructions [here](https://api.slack.com/messaging/webhooks).
+
+The `SlackNotifier` class has only one method, with optional parameters to customize your messages.
+
+```dart
+Future<String> send(String text,
+    {String channel, String icon_emoji, String icon_url, String username, List<Attachment> attachments});
+```
+
+## Result
+
+The message will look like this:
+
+![example](https://a.slack-edge.com/80588/img/integrations/incoming_webhook_example1.png)
