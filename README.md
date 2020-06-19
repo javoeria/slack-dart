@@ -17,6 +17,12 @@ Future<String> send(String text,
     {String channel, String icon_emoji, String icon_url, String username, List<Attachment> attachments});
 ```
 
+- `channel`: Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
+- `icon_emoji`: Emoji to use as the icon for this message.
+- `icon_url`: URL to an image to use as the icon for this message.
+- `username`: Set your bot's user name.
+- `attachments`: Attachment model list that can be added as secondary content.
+
 ## Result
 
 The message will look like this:
