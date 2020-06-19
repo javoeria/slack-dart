@@ -13,15 +13,15 @@ If you don't have it, follow the instructions [here](https://api.slack.com/messa
 The `SlackNotifier` class has only one method, with optional parameters to customize your messages.
 
 ```dart
-Future<String> send(String text,
-    {String channel, String iconEmoji, String iconUrl, String username, List<Attachment> attachments});
+Future<String> send(
+    String text, {
+    String channel,   // Channel, private group, or IM channel name to send message to.
+    String iconEmoji, // Emoji to use as the icon for this message.
+    String iconUrl,   // URL to an image to use as the icon for this message.
+    String username,  // Set your bot's user name.
+    List<Attachment> attachments, // Attachment list that can be added as secondary content.
+});
 ```
-
-- `channel`: Channel, private group, or IM channel to send message to. Can be an encoded ID, or a name.
-- `iconEmoji`: Emoji to use as the icon for this message.
-- `iconUrl`: URL to an image to use as the icon for this message.
-- `username`: Set your bot's user name.
-- `attachments`: Attachment model list that can be added as secondary content.
 
 ## Result
 
