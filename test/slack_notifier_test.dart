@@ -16,7 +16,8 @@ void main() {
 
   test('send attachment message', () async {
     var attachment = Attachment(title: 'title');
-    var response = await slack.send('test', channel: 'test', attachments: [attachment]);
+    var response =
+        await slack.send('test', channel: 'test', attachments: [attachment]);
     expect(response, 'ok');
   });
 

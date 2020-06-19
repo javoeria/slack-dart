@@ -18,7 +18,10 @@ class SlackNotifier {
     String username,
     List<Attachment> attachments,
   }) async {
-    var webhookUrl = token.startsWith('https') ? token : 'https://hooks.slack.com/services/$token';
+    var webhookUrl = token.startsWith('https')
+        ? token
+        : 'https://hooks.slack.com/services/$token';
+
     var body = {
       'text': text,
       'link_names': true,
@@ -27,7 +30,9 @@ class SlackNotifier {
     if (icon_emoji != null) body['icon_emoji'] = icon_emoji;
     if (icon_url != null) body['icon_url'] = icon_url;
     if (username != null) body['username'] = username;
-    if (attachments != null) body['attachments'] = attachments.map((a) => a.toMap()).toList();
+    if (attachments != null) {
+      body['attachments'] = attachments.map((a) => a.toMap()).toList();
+    }
 
     var response = await http.post(
       webhookUrl,

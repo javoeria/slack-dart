@@ -91,7 +91,9 @@ class Attachment {
     if (author_link != null) attachment['author_link'] = author_link;
     if (color != null) attachment['color'] = color;
     if (fallback != null) attachment['fallback'] = fallback;
-    if (fields != null) attachment['fields'] = fields.map((f) => f.toMap()).toList();
+    if (fields != null) {
+      attachment['fields'] = fields.map((f) => f.toMap()).toList();
+    }
     if (footer != null) attachment['footer'] = footer;
     if (footer_icon != null) attachment['footer_icon'] = footer_icon;
     if (image_url != null) attachment['image_url'] = image_url;
