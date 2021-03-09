@@ -2,7 +2,7 @@ import 'package:slack_notifier/slack_notifier.dart';
 import 'package:test/test.dart';
 
 void main() {
-  SlackNotifier slack;
+  late SlackNotifier slack;
 
   setUpAll(() {
     // This Webhook URL is for testing only
@@ -22,7 +22,7 @@ void main() {
   });
 
   test('send null message', () async {
-    var response = await slack.send(null, channel: 'test');
+    var response = await slack.send('', channel: 'test');
     expect(response, 'missing_text_or_fallback_or_attachments');
   });
 

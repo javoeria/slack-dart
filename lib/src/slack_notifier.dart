@@ -12,11 +12,11 @@ class SlackNotifier {
   /// Send message to your slack workspace.
   Future<String> send(
     String text, {
-    String channel,
-    String iconEmoji,
-    String iconUrl,
-    String username,
-    List<Attachment> attachments,
+    String? channel,
+    String? iconEmoji,
+    String? iconUrl,
+    String? username,
+    List<Attachment>? attachments,
   }) async {
     var webhookUrl = token.startsWith('https')
         ? token
@@ -35,7 +35,7 @@ class SlackNotifier {
     }
 
     var response = await http.post(
-      webhookUrl,
+      Uri.parse(webhookUrl),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode(body),
     );
