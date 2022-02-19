@@ -14,6 +14,12 @@ void main() {
     expect(response, 'ok');
   });
 
+  test('send block message', () async {
+    var block = HeaderBlock(text: 'test');
+    var response = await slack.send('', channel: 'test', blocks: [block]);
+    expect(response, 'ok');
+  });
+
   test('send attachment message', () async {
     var attachment = Attachment(title: 'title');
     var response =

@@ -11,6 +11,7 @@ To use this package, your workspace needs to have a Webhook URL.
 If you don't have it, follow the instructions [here](https://api.slack.com/messaging/webhooks).
 
 The `SlackNotifier` class has only one method, with optional parameters to customize your messages.
+It supports [block kit](https://api.slack.com/reference/block-kit).
 
 ```dart
 Future<String> send(
@@ -19,7 +20,8 @@ Future<String> send(
   String? iconEmoji, // Emoji to use as the icon for this message.
   String? iconUrl,   // URL to an image to use as the icon for this message.
   String? username,  // Set your bot's user name.
-  List<Attachment>? attachments, // Attachment list that can be added as secondary content.
+  List<Block>? blocks, // Blocks that can be combined to create interactive messages.
+  List<Attachment>? attachments, // Attachments that can be added as secondary content.
 });
 ```
 
