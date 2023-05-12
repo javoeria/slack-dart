@@ -10,20 +10,26 @@ void main() {
   });
 
   test('send plain message', () async {
-    var response = await slack.send('test', channel: 'test');
+    var response = await slack.send(
+      'Hello world',
+      channel: 'test',
+      iconEmoji: ':chart_with_upwards_trend:',
+      iconUrl: 'https://picsum.photos/48/48',
+      username: 'My Bot',
+    );
     expect(response, 'ok');
   });
 
   test('send block message', () async {
-    var block = HeaderBlock(text: 'test');
+    var block = SectionBlock(text: 'Hello world');
     var response = await slack.send('', channel: 'test', blocks: [block]);
     expect(response, 'ok');
   });
 
   test('send attachment message', () async {
-    var attachment = Attachment(title: 'title');
+    var attachment = Attachment(pretext: 'pre-hello', text: 'text-world');
     var response =
-        await slack.send('test', channel: 'test', attachments: [attachment]);
+        await slack.send('', channel: 'test', attachments: [attachment]);
     expect(response, 'ok');
   });
 
@@ -40,5 +46,24 @@ void main() {
   test('team not found', () async {
     var response = await SlackNotifier('T/B/X').send('test');
     expect(response, 'no_team');
+  });
+
+  test('send multiple blocks', () async {
+    var blocks = [
+      HeaderBlock(text: 'Onboarding'),
+      SectionBlock(text: 'Example message for engaging new users.'),
+      DividerBlock(),
+      SectionBlock(
+          text:
+              "Hey there :wave: I'm *TaskBot*. I'm here to help you create and manage tasks in Slack."),
+      ImageBlock(
+        imageUrl:
+            'https://api.slack.com/img/blocks/bkb_template_images/onboardingComplex.jpg',
+        altText: 'image1',
+        title: 'image1',
+      ),
+    ];
+    var response = await slack.send('test', channel: 'test', blocks: blocks);
+    expect(response, 'ok');
   });
 }

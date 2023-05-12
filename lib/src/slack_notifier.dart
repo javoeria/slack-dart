@@ -7,10 +7,13 @@ import 'block.dart';
 class SlackNotifier {
   SlackNotifier(this.token);
 
-  /// Webhook URL that is specific to a single user and a single channel.
+  /// Authentication token bearing required scopes.
   final String token;
 
-  /// Send message to your slack workspace.
+  /// Sends a message to a channel.
+  ///
+  /// One of these arguments is required to describe the content of the message.
+  /// If `attachments` or `blocks` are included, `text` will be used as fallback text for notifications only.
   Future<String> send(
     String text, {
     String? channel,
@@ -38,7 +41,7 @@ class SlackNotifier {
 
     var response = await http.post(
       Uri.parse(webhookUrl),
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
       body: jsonEncode(body),
     );
     return response.body;

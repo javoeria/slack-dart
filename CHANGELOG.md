@@ -1,3 +1,8 @@
+## 1.3.0
+
+* Update blocks and documentation.
+* Fix issue on Flutter Web ([#2](https://github.com/javoeria/slack-dart/issues/2)).
+
 ## 1.2.0
 
 * Add layout blocks support.
