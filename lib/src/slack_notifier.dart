@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+
 import 'attachment.dart';
 import 'block.dart';
 
@@ -23,9 +24,7 @@ class SlackNotifier {
     List<Block>? blocks,
     List<Attachment>? attachments,
   }) async {
-    var webhookUrl = token.startsWith('https')
-        ? token
-        : 'https://hooks.slack.com/services/$token';
+    var webhookUrl = token.startsWith('https') ? token : 'https://hooks.slack.com/services/$token';
 
     var body = {'text': text, 'link_names': true};
     if (channel != null) body['channel'] = channel;
@@ -39,11 +38,15 @@ class SlackNotifier {
       body['attachments'] = attachments.map((a) => a.toMap()).toList();
     }
 
-    var response = await http.post(
+    final response = await http.post(
       Uri.parse(webhookUrl),
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: {
+        'Content-Type': 'application/json',
+        'accept': 'application/json',
+      },
       body: jsonEncode(body),
     );
+
     return response.body;
   }
 }
