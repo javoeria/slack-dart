@@ -85,16 +85,14 @@ class Attachment {
   /// Form factors, like mobile versus desktop may also transform its rendered appearance.
   final int? ts;
 
-  Map<dynamic, dynamic> toMap() {
-    var attachment = {};
+  Map<String, dynamic> toJson() {
+    final attachment = <String, dynamic>{};
     if (authorIcon != null) attachment['author_icon'] = authorIcon;
     if (authorLink != null) attachment['author_link'] = authorLink;
     if (authorName != null) attachment['author_name'] = authorName;
     if (color != null) attachment['color'] = color;
     if (fallback != null) attachment['fallback'] = fallback;
-    if (fields != null) {
-      attachment['fields'] = fields!.map((f) => f.toMap()).toList();
-    }
+    if (fields != null) attachment['fields'] = fields;
     if (footer != null) attachment['footer'] = footer;
     if (footerIcon != null) attachment['footer_icon'] = footerIcon;
     if (imageUrl != null) attachment['image_url'] = imageUrl;
@@ -122,8 +120,8 @@ class Field {
   /// Defaults to `false`.
   final bool? short;
 
-  Map<dynamic, dynamic> toMap() {
-    var field = {};
+  Map<String, dynamic> toJson() {
+    final field = <String, dynamic>{};
     if (title != null) field['title'] = title;
     if (value != null) field['value'] = value;
     if (short != null) field['short'] = short;

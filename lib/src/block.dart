@@ -1,35 +1,35 @@
 abstract class Block {
-  Map<dynamic, dynamic> toMap();
+  Map<String, dynamic> toJson();
 }
 
-/// A block that is used to hold interactive elements.
+/// Holds multiple interactive elements.
 class ActionsBlock extends Block {
   ActionsBlock({required this.elements});
 
   /// An array of interactive element objects - buttons, select menus, overflow menus, or date pickers.
   /// There is a maximum of 25 elements in each action block.
-  final List<Map> elements;
+  final List<Map<String, dynamic>> elements;
 
   @override
-  toMap() => {'type': 'actions', 'elements': elements};
+  toJson() => {'type': 'actions', 'elements': elements};
 }
 
-/// Displays message context, which can include both images and text.
+/// Displays contextual info, which can include both images and text.
 class ContextBlock extends Block {
   ContextBlock({required this.elements});
 
   /// An array of image elements and text objects.
   /// Maximum number of items is 10.
-  final List<Map> elements;
+  final List<Map<String, dynamic>> elements;
 
   @override
-  toMap() => {'type': 'context', 'elements': elements};
+  toJson() => {'type': 'context', 'elements': elements};
 }
 
-/// A content divider to split up different blocks inside of a message.
+/// Visually separates pieces of info inside of a message.
 class DividerBlock extends Block {
   @override
-  toMap() => {'type': 'divider'};
+  toJson() => {'type': 'divider'};
 }
 
 /// Displays a remote file.
@@ -41,10 +41,10 @@ class FileBlock extends Block {
   final String externalId;
 
   @override
-  toMap() => {'type': 'file', 'external_id': externalId, 'source': 'remote'};
+  toJson() => {'type': 'file', 'external_id': externalId, 'source': 'remote'};
 }
 
-/// A `header` is a plain-text block that displays in a larger, bold font.
+/// Displays a larger-sized text block.
 /// Use it to delineate between different groups of content in your app's surfaces.
 class HeaderBlock extends Block {
   HeaderBlock({required this.text});
@@ -54,13 +54,14 @@ class HeaderBlock extends Block {
   final String text;
 
   @override
-  toMap() => {
+  toJson() => {
         'type': 'header',
         'text': {'type': 'plain_text', 'text': text}
       };
 }
 
-/// A simple image block, designed to make those cat photos really pop.
+/// Displays an image.
+/// An image block, designed to make those cat photos really pop.
 class ImageBlock extends Block {
   ImageBlock({required this.imageUrl, required this.altText, this.title});
 
@@ -77,9 +78,8 @@ class ImageBlock extends Block {
   final String? title;
 
   @override
-  toMap() {
-    var block = {};
-    block['type'] = 'image';
+  toJson() {
+    final block = <String, dynamic>{'type': 'image'};
     block['image_url'] = imageUrl;
     block['alt_text'] = altText;
     if (title != null) block['title'] = {'type': 'plain_text', 'text': title};
@@ -88,7 +88,7 @@ class ImageBlock extends Block {
   }
 }
 
-/// A block that collects information from users - it can hold a plain-text input element, a checkbox element, a radio button element, a select menu element, a multi-select menu element, or a datepicker.
+/// Collects information from users via block elements.
 class InputBlock extends Block {
   InputBlock({required this.label, required this.element, this.hint});
 
@@ -97,16 +97,15 @@ class InputBlock extends Block {
   final String label;
 
   /// A plain-text input element, a checkbox element, a radio button element, a select menu element, a multi-select menu element, or a datepicker.
-  final Map element;
+  final Map<String, dynamic> element;
 
   /// An optional hint that appears below an input element in a lighter grey.
   /// Maximum length for this field is 2000 characters.
   final String? hint;
 
   @override
-  toMap() {
-    var block = {};
-    block['type'] = 'input';
+  toJson() {
+    final block = <String, dynamic>{'type': 'input'};
     block['label'] = {'type': 'plain_text', 'text': label};
     block['element'] = element;
     if (hint != null) block['hint'] = {'type': 'plain_text', 'text': hint};
@@ -115,7 +114,19 @@ class InputBlock extends Block {
   }
 }
 
-/// A `section` is one of the most flexible blocks available - it can be used as a simple text block, in combination with text fields, or side-by-side with any of the available block elements.
+/// Displays formated, structured representation of text.
+class RichTextBlock extends Block {
+  RichTextBlock({required this.elements});
+
+  /// An array of rich text objects - rich_text_section, rich_text_list, rich_text_quote, rich_text_preformatted.
+  final List<Map<String, dynamic>> elements;
+
+  @override
+  toJson() => {'type': 'rich_text', 'elements': elements};
+}
+
+/// Displays text, possibly alongside block elements.
+/// A `section` can be used as a text block, in combination with text fields, or side-by-side with certain block elements.
 class SectionBlock extends Block {
   SectionBlock({this.text, this.fields, this.accessory});
 
@@ -130,13 +141,12 @@ class SectionBlock extends Block {
   /// Maximum length for each item is 2000 characters.
   final List<String>? fields;
 
-  /// One of the available element objects.
-  final Map? accessory;
+  /// One of the compatible element objects.
+  final Map<String, dynamic>? accessory;
 
   @override
-  toMap() {
-    var block = {};
-    block['type'] = 'section';
+  toJson() {
+    final block = <String, dynamic>{'type': 'section'};
     if (text != null) block['text'] = {'type': 'mrkdwn', 'text': text};
     if (fields != null) {
       block['fields'] =
@@ -148,6 +158,7 @@ class SectionBlock extends Block {
   }
 }
 
+/// Displays an embedded video player.
 /// A `video` block is designed to embed videos in all app surfaces (e.g. link unfurls, messages, modals, App Home) - anywhere you can put blocks.
 class VideoBlock extends Block {
   VideoBlock({
@@ -170,6 +181,7 @@ class VideoBlock extends Block {
   final String? authorName;
 
   /// Description for video in plain text format.
+  /// Must be less than 200 characters.
   final String? description;
 
   /// Icon for the video provider.
@@ -183,8 +195,7 @@ class VideoBlock extends Block {
   final String title;
 
   /// Hyperlink for the title text.
-  /// Must correspond to the non-embeddable URL for the video.
-  /// Must go to an HTTPS URL.
+  /// Must correspond to the non-embeddable HTTPS URL for the video.
   final String? titleUrl;
 
   /// The thumbnail image URL.
@@ -195,9 +206,8 @@ class VideoBlock extends Block {
   final String videoUrl;
 
   @override
-  toMap() {
-    var block = {};
-    block['type'] = 'video';
+  toJson() {
+    final block = <String, dynamic>{'type': 'video'};
     block['alt_text'] = altText ?? title;
     if (authorName != null) block['author_name'] = authorName;
     if (description != null) {

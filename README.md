@@ -20,7 +20,7 @@ Read more about webhooks [here](https://api.slack.com/messaging/webhooks).
 
 ## Usage
 
-This method posts a message to a public channel, private channel, or direct message/IM channel.
+This method posts a message to a public channel, private channel, or direct message conversation.
 
 ```dart
 final slack = SlackNotifier('WEBHOOK_URL');
@@ -35,21 +35,22 @@ slack.send(
 );
 ```
 
-The usage of the `text` field changes depending on whether you're using `blocks`. If you are using `blocks`, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with `mrkdwn`.
+The usage of the `text` field changes depending on whether you're using `blocks`. If you're using `blocks`, this is used as a fallback string to display in notifications. If you aren't, this is the main body text of the message. It can be formatted as plain text, or with `mrkdwn`.
 
 ## Blocks
 
 Blocks are a series of components that can be combined to create visually rich and compellingly interactive messages. [Block Kit](https://api.slack.com/reference/block-kit) can make your app's communication clearer while also giving you consistent opportunity to interact with and assist users.
 
-- `ActionsBlock` A block that is used to hold multiple interactive elements.
-- `ContextBlock` Used for contextual info, which can include both images and text.
-- `DividerBlock` A content divider used to visually separate pieces of info inside of a message.
-- `FileBlock` Used with remote files to display info about the attached files.
-- `HeaderBlock` A larger-sized text block used as a header.
-- `ImageBlock` A simple image block, designed to make those cat photos really pop.
-- `InputBlock` A block that collects information from users in a multitude of ways.
-- `SectionBlock` Display text or combine text with interactive elements and images.
-- `VideoBlock` A block designed to display those cool cat videos.
+- `ActionsBlock` Holds multiple interactive elements.
+- `ContextBlock` Provides contextual info, which can include both images and text.
+- `DividerBlock` Visually separates pieces of info inside of a message.
+- `FileBlock` Displays info about remote files.
+- `HeaderBlock` Displays a larger-sized text block.
+- `ImageBlock` Displays an image.
+- `InputBlock` Collects information from users via block elements.
+- `RichTextBlock` Displays formated, structured representation of text.
+- `SectionBlock` Displays text, possibly alongside block elements.
+- `VideoBlock` Displays an embedded video player.
 
 Individual blocks can be stacked together to create complex visual layouts.
 
